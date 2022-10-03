@@ -1,10 +1,11 @@
-import moongose from 'mongoose'
+import mongoose from 'mongoose'
 
-export const dbConenction = async () => {
+export const dbConnection = async () => {
 	try {
-		await moongose.connect(String(process.env.DB_CNN))
+		await mongoose.connect('mongodb://localhost/shop_services')
 		console.log('DB Online')
 	} catch (error) {
+		console.log(error)
 		throw new Error('Error when initializing DB')
 	}
 }
