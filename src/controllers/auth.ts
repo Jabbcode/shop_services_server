@@ -12,7 +12,7 @@ export const login = async (req: Request, res: Response) => {
 		if (!userDB) {
 			return res.status(400).json({
 				ok: false,
-				msg: 'Usuario o contraseña Invalidos',
+				msg: 'User or password invalid',
 			})
 		}
 
@@ -21,7 +21,7 @@ export const login = async (req: Request, res: Response) => {
 		if (!validPassword) {
 			return res.status(400).json({
 				ok: false,
-				msg: 'Usuario o contraseña Invalidos',
+				msg: 'User or password invalid',
 			})
 		}
 
