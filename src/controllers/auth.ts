@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import User from '../models/User'
+import { generarJWT } from '../helpers/jws'
 
 export const login = async (req: Request, res: Response) => {
 	const { email, password } = req.body
@@ -24,10 +25,11 @@ export const login = async (req: Request, res: Response) => {
 			})
 		}
 
-		//TODO: Agregar token
+		const token = await generarJWT(userDB.id, String(userDB.email))
 
 		res.status(202).json({
 			user: userDB,
+			token,
 		})
 	} catch (error) {
 		return res.status(500).json({
@@ -55,11 +57,12 @@ export const register = async (req: Request, res: Response) => {
 
 		await newUser.save()
 
-		//TODO: Agregar token
+		const token = await generarJWT(newUser.id, String(newUser.email))
 
 		return res.status(201).json({
 			msg: 'Successfully Registered User',
 			user: newUser,
+			token,
 		})
 	} catch (error) {
 		return res.status(500).json({
