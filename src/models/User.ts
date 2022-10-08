@@ -14,10 +14,13 @@ class User {
 	address: String
 
 	@prop({ required: true, trim: true })
-	email: String
+	email: String | string
 
 	@prop({ required: true, minlength: 8 })
 	password: String
+
+	@prop({ required: true })
+	email_validated: Boolean
 }
 
 const UserModel = getModelForClass(User)
