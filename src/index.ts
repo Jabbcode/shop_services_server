@@ -2,6 +2,7 @@ import express from 'express'
 import authRouter from './routes/auth'
 import { dbConnection } from './config/db'
 import dotenv from 'dotenv'
+import cors from 'cors'
 
 dotenv.config() // Configuracion de variables de entorno
 
@@ -10,6 +11,7 @@ dbConnection() // Conexion a la base de datos de MongoDB
 const PORT = process.env.PORT
 
 const app = express()
+app.use(cors())
 
 app.use(express.json())
 
